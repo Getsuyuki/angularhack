@@ -1,0 +1,39 @@
+
+html {
+    background: url(armin.png), black;
+    background-size: 100%;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+#bgi {
+    /* display: table-column-group; */
+}
+#logo {   
+    top: 20px;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
+}
+
+#searchbar {
+    display: block;
+    margin-top: 80px;
+    margin-left:auto;
+    margin-right:auto;
+}
+input[type=text]{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+     background-color: rgba(255, 255, 255, 0.5);
+     border: 2px solid rgba(200, 200, 200, 0.5);
+     border-radius: 10px;
+}
+/* #sicon{
+    display: inline-block;
+    background-size: 10px 10px;
+} */
+
+input.focused {
+    border: 2px solid rgba(230, 230, 0, 0.5);
+}

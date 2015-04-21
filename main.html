@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <title> ExperiEvents </title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body ng-controller="MainCtrl">
+    <div id="bgi">
+    <div>
+    <image id="logo" src="icon.gif"/>
+    </div>
+    <div id="searchbar">
+    <input type="text" ng-model="model.searchText" ng-enter="onSearch()" ng-focus="toggleClass($event)" ng-blur="toggleClass($event)"/>
+<!--     <image id="sicon" src="sicon.png" /> -->
+    </div>
+    <div class="content">
+        <div id="lspin" ng-hide="loading"></div>
+        <div id="listview" ng-hide="showResults">
+            <ul>
+                <li ng-repeat="char in results track by $index">{{char}}</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    <script type="text/javascript">
+    var app = angular.module("myApp", []);
+
+            app.controller("MainCtrl", ["$scope", "$http", function($scope, $http) {
+                $scope.model = {searchText: ''};
+                
+                $scope.results = [];
+                
+                $scope.notLoading = true;
+                
+                $scope.notShowResults = true;
+
+                $scope.onSearch = function ()
+                {
+                    //$scope.loading = true;
+                    $scope.notShowResults = false;
+                    $scope.results = $scope.model.searchText.split('');
+                    $scope.notLoading = true;
+                    console.log($scope.results);
+                };
+                
+                $scope.toggleClass = function (ev)
+                {
+                    jQuery(ev.target).toggleClass('focused');
+                }
+            }]);
+            
+            app.directive('ngEnter', function () {
+                return function (scope, element, attrs) {
+                element.bind("keydown keypress", function (event) {
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.$eval(attrs.ngEnter);
+                    });
+
+                    event.preventDefault();
+                    };
+                });
+            };
+            });
+            
+    </script>
+</body>
+</html>
